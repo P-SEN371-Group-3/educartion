@@ -112,12 +112,20 @@ function resolveImageUrl(product: Product): string {
     (typeof product["image"] === "string" && String(product["image"])) ||
     (typeof product["imageUrl"] === "string" && String(product["imageUrl"]));
 
+  if (image) {
+    return buildProductImagePath(image);
+  }
+
   const imageFromCollection =
     resolveImageFromCollection(product["product_image"]) ??
     resolveImageFromCollection(product["product_images"]) ??
     resolveImageFromCollection(product["images"]);
 
-  return buildProductImagePath(image ?? imageFromCollection);
+  if (imageFromCollection) {
+    return buildProductImagePath(imageFromCollection);
+  }
+
+  return "/images/product-placeholder.png";
 }
 
 export default function ProductDetailsPage() {
@@ -223,7 +231,7 @@ export default function ProductDetailsPage() {
     }
 
     cartService.saveCartToStorage(updated);
-    
+
     setSuccessMessage(`${quantity} item(s) added to cart.`);
   };
 
@@ -342,11 +350,10 @@ export default function ProductDetailsPage() {
                         type="button"
                         onClick={handleAddToCart}
                         disabled={!isInStock}
-                        className={`inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-semibold transition ${
-                          isInStock
-                            ? "bg-amber-400 text-slate-950 hover:bg-amber-300"
-                            : "cursor-not-allowed bg-white/10 text-slate-500"
-                        }`}
+                        className={`inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-semibold transition ${isInStock
+                          ? "bg-amber-400 text-slate-950 hover:bg-amber-300"
+                          : "cursor-not-allowed bg-white/10 text-slate-500"
+                          }`}
                       >
                         Add to cart
                       </button>
@@ -355,7 +362,7 @@ export default function ProductDetailsPage() {
                       <div>
                         <br />
                         <div className="mb-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
-                        {successMessage}
+                          {successMessage}
                         </div>
                       </div>
                     )}

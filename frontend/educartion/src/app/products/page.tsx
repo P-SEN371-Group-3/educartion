@@ -62,12 +62,20 @@ function resolveImageUrl(product: Product): string {
     (typeof product["image"] === "string" && String(product["image"])) ||
     (typeof product["imageUrl"] === "string" && String(product["imageUrl"]));
 
+  if (image) {
+    return buildProductImagePath(image);
+  }
+
   const imageFromCollection =
     resolveImageFromCollection(product["product_image"]) ??
     resolveImageFromCollection(product["product_images"]) ??
     resolveImageFromCollection(product["images"]);
 
-  return buildProductImagePath(image ?? imageFromCollection);
+  if (imageFromCollection) {
+    return buildProductImagePath(imageFromCollection);
+  }
+
+  return "/images/product-placeholder.png";
 }
 
 export default function ProductsPage() {

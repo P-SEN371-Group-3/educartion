@@ -29,16 +29,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## File Structure
 
 ## Ongoing Team To-do List
-### Documentation
-- [ ] Fix up big document
-    - [ ] Regen ERD
-
-- [ ] README.md files
-    - [ ] Main
-    - [ ] Backend
-    - [ ] Frontend
-    - [ ] Data
-
 ### Due Sat 30 May (M4)
 
 ##### Data
@@ -47,36 +37,37 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ##### Backend
 - [ ] Finish api endpoints
     - [ ] Auth
+        - HTTPS or still on http?
     - [ ] Catalog
     - [x] Cart
     - [ ] Orders
     - [x] Payments
     - [ ] Shipment
     - [ ] Admin
-- [ ] Unit Tests
-    - [ ] 0. Catalog Unit Tests + small testing to ensure products working
+- [x] Unit Tests
+    - [x] 0. Catalog Unit Tests + small testing to ensure products working
 
 
 ##### Frontend
-- [ ] 0. High Fidelity Wireframes + Prototype
-- [ ] 1. Refactor existing front end
-    - [ ] Check recording in case there's something missed
+- [x] 0. High Fidelity Wireframes + Prototype
+- [x] 1. Refactor existing front end
+    - [x] Check recording in case there's something missed
     - [ ] Front End Switching between Light and Dark Themes
-    - [ ] Resize the blocks (+ image) on products
+    - [x] Resize the blocks (+ image) on products
     - [x] Fix delete button overlaying price on cart page
     - [ ] Move categories to the left
     - [ ] Slider needs to be added (check other filters as well on products page)
 
 - [x] 2. Link pages together
-    - [ ] Set start page to products page (currently goes to login page)
+    - [x] Set start page to products page (currently goes to login page)
     - [x] Link pages together in logical order
-    - [ ] Check Navbar links and make sure they work
-    - [ ] Add links to the footer as well
+    - [ ] ~~Check Navbar links and make sure they work~~
+    - [ ] ~~Add links to the footer as well~~
 
 - [ ] 3. Check functionality on each page, if working then this can be ticked:
     - [ ] Products page
     - [ ] Product details page
-        - [ ] Add product button does not appear to do anything, but it does actually
+        - [x] Add product button does not appear to do anything, but it does actually
     - [ ] Cart page
     - [ ] Checkout page
     - [ ] Orders page
@@ -88,15 +79,23 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Due Fri 5 June (M5)
 
-- [ ] Confirm Backend Unit Tests are done
-- [ ] Frontend Unit Tests
-- [ ] Whatever is added in class (30 May)
+- [x] Confirm Backend Unit Tests are done
+- [x] Frontend Unit Tests
+- [ ] ~~Whatever is added in class (30 May)~~
 
-### Due Sat 27 June (M6)
+### Due Sat 24 July (M6)
 
 - [ ] HTTPS Certificates and ListenAndServe -> ListenAndServeTLS for HTTPS instead of HTTP - TODO for M6
 - [ ] Render Deployment
 - [ ] Finalise documentation
-- [ ] Add Electron wrap-around for desktop app as additional requirements
+    - [ ] Fix up big document
+        - [ ] Regen ERD
 
-## Dates 
+    - [ ] README.md files
+        - [ ] Main
+        - [ ] Backend
+        - [ ] Frontend
+        - [ ] Data
+- [ ] Add Electron wrap-around for desktop app as additional requirements
+- [ ] Presentation
+- [ ] Record Video

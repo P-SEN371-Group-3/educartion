@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-import type { OrderDetail, OrderItemDetail, OrderItemProductDetails } from "@/lib/orders-contract";
-
-const productImageBasePath = "/product_images";
+import type { OrderDetail, OrderItemDetail } from "@/lib/orders-contract";
 
 function formatCurrency(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -27,66 +25,6 @@ function formatDate(value: string): string {
     month: "short",
     day: "numeric",
   }).format(date);
-}
-
-function buildProductImagePath(imageValue?: string): string {
-  if (typeof imageValue !== "string" || !imageValue.trim()) {
-    return "/images/product-placeholder.png";
-  }
-
-  const trimmed = imageValue.trim().replace(/^\/+/, "");
-  return `${productImageBasePath}/${trimmed}`;
-}
-
-function extractImageUrl(value: unknown): string | undefined {
-  if (!value || typeof value !== "object") {
-    return undefined;
-  }
-
-  const record = value as Record<string, unknown>;
-  return (
-    (typeof record.image_url === "string" && record.image_url) ||
-    (typeof record.imageUrl === "string" && record.imageUrl) ||
-    (typeof record.url === "string" && record.url) ||
-    undefined
-  );
-}
-
-function resolveImageFromCollection(images: unknown): string | undefined {
-  if (!Array.isArray(images) || images.length === 0) {
-    return undefined;
-  }
-
-  const primary = images.find((item) => {
-    if (!item || typeof item !== "object") {
-      return false;
-    }
-    const record = item as Record<string, unknown>;
-    return record.is_primary === true || record.isPrimary === true;
-  });
-
-  return extractImageUrl(primary ?? images[0]);
-}
-
-function resolveProductImage(product: OrderItemProductDetails | null | undefined): string {
-  if (!product) {
-    return buildProductImagePath();
-  }
-
-  const record = product as Record<string, unknown>;
-  const image =
-    (typeof record.image === "string" && record.image) ||
-    (typeof record.image_url === "string" && record.image_url) ||
-    (typeof record["image_url"] === "string" && String(record["image_url"])) ||
-    (typeof record["image"] === "string" && String(record["image"])) ||
-    (typeof record["imageUrl"] === "string" && String(record["imageUrl"]));
-
-  const imageFromCollection =
-    resolveImageFromCollection(record["product_image"]) ??
-    resolveImageFromCollection(record["product_images"]) ??
-    resolveImageFromCollection(record["images"]);
-
-  return buildProductImagePath(image ?? imageFromCollection);
 }
 
 function buildItemKey(item: OrderItemDetail, index: number): string {
@@ -289,7 +227,6 @@ export default function OrderDetailPage() {
                   <div className="space-y-4">
                     {items.map((item, index) => {
                       const product = item.product_details;
-                      const imageUrl = resolveProductImage(product);
                       const lineTotal = calculateLineTotal(item);
 
                       return (
