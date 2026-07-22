@@ -47,5 +47,4 @@ COPY --from=builder /app/public ./public
 
 EXPOSE 3000
 
-# CMD ["node", "server.js", "--hostname","0.0.0.0"]
-CMD ["node", "-e", "require('http').createServer((req,res)=>res.end('hello')).listen(process.env.PORT,'0.0.0.0')"]
+CMD ["node", "server.js", "--hostname","0.0.0.0"]
