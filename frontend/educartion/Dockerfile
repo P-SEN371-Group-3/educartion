@@ -47,4 +47,5 @@ COPY --from=builder /app/public ./public
 
 EXPOSE 3000
 
-CMD ["node", "server.js", "--hostname","0.0.0.0"]
+#CMD ["node", "server.js", "--hostname","0.0.0.0"]
+CMD ["sh", "-c", "echo PORT=$PORT && node server.js"]
